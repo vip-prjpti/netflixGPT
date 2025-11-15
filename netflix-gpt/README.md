@@ -6,6 +6,9 @@
 - Header
 - Routing
 - Form validation
+- firebase Setup
+- firebase deoploy
+- Create Signup User in fireb ase
 
 
 # Features
