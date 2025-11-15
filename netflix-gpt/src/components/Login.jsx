@@ -6,8 +6,12 @@ const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+    setErrorMessage(" ");
+    setIsSuccess(false);
+
   }
 
   const email = useRef(null);
@@ -16,18 +20,22 @@ const Login = () => {
 
   const handleButtonClick = () => {
     // validate the form data
-    const message = checkValidData(email.current.value, password.current.value, fullName.current.value);
+    const message = checkValidData(email.current.value, password.current.value, fullName.current?.value || "", isSignInForm);
 
-    // if (message === "Welcome") {
-    //   setIsSuccess(true);
-    //   setErrorMessage(message);
+    if (message === null) {
+      setIsSuccess(true);
+      setErrorMessage("Welcome user!");
+    }
+    else {
+      setIsSuccess(false);
+      setErrorMessage(message);
+    }
+    // setErrorMessage(message);
+    // setIsSuccess(message === "Welcome");
+
+    // if(message === "Welcome"){
+    //   return
     // }
-    // else {
-    //   setErrorMessage(message);
-    //   setIsSuccess(false);
-    // }
-    setErrorMessage(message);
-    setIsSuccess(message === "Welcome");
   }
 
   return (
