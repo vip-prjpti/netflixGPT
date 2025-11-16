@@ -6,7 +6,7 @@ const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  
+
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
     setErrorMessage(" ");
@@ -14,6 +14,7 @@ const Login = () => {
 
   }
 
+  // userRef hook - to refernece the value from the form which is not going to render
   const email = useRef(null);
   const password = useRef(null);
   const fullName = useRef(null);
