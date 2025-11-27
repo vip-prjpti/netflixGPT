@@ -26,3 +26,8 @@
 # Hooks Used
 - useState
 - useRef - this hook lets us reference a value that's not neede for rendering.
+- useEffect
+- useNavigate
+
+# Redux
+- 

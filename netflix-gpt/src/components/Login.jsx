@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import Header from './Header'
 import checkValidData from '../utils/validate';
 import { auth } from '../utils/firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from 'react-router';
 
 
@@ -49,15 +49,24 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up 
           const user = userCredential.user;
+          updateProfile(user, {
+            displayName: fullName.current.value, photoURL: "https://avatars.githubusercontent.com/u/68685595?v=4"
+          }).then(() => {
+            navigate("/browse")
+          }).catch((error) => {
+            console.log(error.message);
+          });
           console.log(user);
           navigate("/browse")
 
         })
+
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode+"-"+errorMessage);
         });
+
       }
       else {
         //  signInLogic
