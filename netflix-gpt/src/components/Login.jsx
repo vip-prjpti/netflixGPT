@@ -3,14 +3,13 @@ import Header from './Header'
 import checkValidData from '../utils/validate';
 import { auth } from '../utils/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from 'react-router';
+import { USER_AVATAR } from '../utils/constants';
 
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const navigate = useNavigate();
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -50,14 +49,12 @@ const Login = () => {
           // Signed up 
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: fullName.current.value, photoURL: "https://avatars.githubusercontent.com/u/68685595?v=4"
+            displayName: fullName.current.value, photoURL: USER_AVATAR
           }).then(() => {
-            navigate("/browse")
           }).catch((error) => {
             console.log(error.message);
           });
           console.log(user);
-          navigate("/browse")
 
         })
 
@@ -75,7 +72,6 @@ const Login = () => {
           // Signed in 
           const user = userCredential.user;
           console.log(user, "user Signed In")
-          navigate("/browse");
 
           // ...
         })
